@@ -26,7 +26,11 @@ public class WhatsAppProperties {
     private String phoneNumberId;
     private String accessToken;
     private String webhookToken;
+    private String apiVersion = "v22.0";
+    private String apiBaseUrl = "https://graph.facebook.com";
+    private String phoneNumberPattern = "^\\+?[0-9]{10,15}$";
     private int maxRetries = 3;
+    private long retryDelayMs = 1000;
     private String defaultLanguage = "es";
     
     // Templates map
@@ -79,6 +83,38 @@ public class WhatsAppProperties {
 
     public void setDefaultLanguage(String defaultLanguage) {
         this.defaultLanguage = defaultLanguage;
+    }
+
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+    }
+
+    public String getApiBaseUrl() {
+        return apiBaseUrl;
+    }
+
+    public void setApiBaseUrl(String apiBaseUrl) {
+        this.apiBaseUrl = apiBaseUrl;
+    }
+
+    public String getPhoneNumberPattern() {
+        return phoneNumberPattern;
+    }
+
+    public void setPhoneNumberPattern(String phoneNumberPattern) {
+        this.phoneNumberPattern = phoneNumberPattern;
+    }
+
+    public long getRetryDelayMs() {
+        return retryDelayMs;
+    }
+
+    public void setRetryDelayMs(long retryDelayMs) {
+        this.retryDelayMs = retryDelayMs;
     }
 
     public Map<String, TemplateConfig> getTemplates() {

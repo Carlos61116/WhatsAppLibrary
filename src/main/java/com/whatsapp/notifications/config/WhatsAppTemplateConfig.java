@@ -28,12 +28,9 @@ public class WhatsAppTemplateConfig {
      */
     private Map<String, TemplateTypeConfig> templates = new HashMap<>();
 
-    /**
-     * Default language fallback (e.g., "es", "en_US")
-     */
+
     private String defaultLanguage = "es";
 
-    // ============ Getters & Setters ============
 
     public Map<String, TemplateTypeConfig> getTemplates() {
         return templates;
@@ -51,7 +48,6 @@ public class WhatsAppTemplateConfig {
         this.defaultLanguage = defaultLanguage;
     }
 
-    // ============ Public Methods ============
 
     /**
      * Get template configuration by type
@@ -88,31 +84,18 @@ public class WhatsAppTemplateConfig {
         return templates != null && templates.containsKey(templateType);
     }
 
-    // ============ Inner Class ============
 
     /**
      * Configuration for a specific template type (e.g., appointment-confirmation)
      */
     public static class TemplateTypeConfig {
         
-        /**
-         * Template names by language code
-         * Example: { "es": "appointment_confirmation_es", "en_US": "appointment_confirmation_en_us" }
-         */
         private Map<String, String> languages = new HashMap<>();
 
-        /**
-         * Number of parameters expected by the template (0-4)
-         */
         private int params = 0;
 
-        /**
-         * Button IDs if the template has buttons
-         * Example: ["confirm", "reschedule", "cancel"]
-         */
         private List<String> buttons = List.of();
 
-        // ============ Constructor ============
 
         public TemplateTypeConfig() {
         }
@@ -123,7 +106,6 @@ public class WhatsAppTemplateConfig {
             this.buttons = buttons;
         }
 
-        // ============ Getters & Setters ============
 
         public Map<String, String> getLanguages() {
             return languages;
@@ -149,7 +131,6 @@ public class WhatsAppTemplateConfig {
             this.buttons = buttons;
         }
 
-        // ============ Public Methods ============
 
         /**
          * Get template name for a specific language, with fallback to default
@@ -163,29 +144,22 @@ public class WhatsAppTemplateConfig {
                 return null;
             }
             
-            // Try exact language match
             if (languages.containsKey(languageCode)) {
                 return languages.get(languageCode);
             }
             
-            // Try language without country code (e.g., "es" from "es_ES")
             String baseLanguage = languageCode.split("_")[0];
             if (languages.containsKey(baseLanguage)) {
                 return languages.get(baseLanguage);
             }
             
-            // Fallback to default language
             if (languages.containsKey(defaultLanguage)) {
                 return languages.get(defaultLanguage);
             }
             
-            // Last resort: return first available
             return languages.values().stream().findFirst().orElse(null);
         }
 
-        /**
-         * Check if this template has buttons
-         */
         public boolean hasButtons() {
             return buttons != null && !buttons.isEmpty();
         }

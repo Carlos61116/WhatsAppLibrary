@@ -9,3 +9,26 @@ target/
 *.log
 .DS_Store
 .vscode/
+# Environment variables and credentials (NEVER COMMIT)
+.env
+.env.local
+.env.*.local
+application-prod.yml
+application-prod.properties
+application-whatsapp.yml
+secrets.yml
+secrets.json
+*.key
+*.pem
+
+# IDE
+*.swp
+*.swo
+*~
+.gradle/
+build/
+
+# Node (if used)
+node_modules/
+npm-debug.log
+yarn-error.log
