@@ -1,0 +1,84 @@
+# ============================================================================
+# WhatsApp Cloud API - Configuration Example
+# ============================================================================
+# 
+# IMPORTANT: This is an EXAMPLE file. DO NOT commit real credentials.
+# Use environment variables or .env files for sensitive values.
+#
+# Copy this to application.yml or create application-whatsapp.yml and fill with your actual values
+# ============================================================================
+
+whatsapp:
+  # Enable/disable WhatsApp integration
+  enabled: true
+
+  # WhatsApp Business Phone Number ID
+  phone-number-id: "${WHATSAPP_PHONE_NUMBER_ID:YOUR_PHONE_NUMBER_ID_HERE}"
+
+  # WhatsApp Cloud API Access Token
+  access-token: "${WHATSAPP_ACCESS_TOKEN:YOUR_ACCESS_TOKEN_HERE}"
+  
+  # WhatsApp Cloud API version
+  api-version: "v22.0"
+  
+  # WhatsApp API base URL (should not change)
+  api-base-url: "https://graph.facebook.com"
+  
+  # Phone number validation regex
+  phone-number-pattern: "^\\+?[0-9]{10,15}$"
+  
+  # Maximum retry attempts for failed requests
+  max-retries: 3
+  
+  # Delay between retries in milliseconds
+  retry-delay-ms: 1000
+  
+  # Default language for templates (if not specified in send call)
+  default-language: es
+
+  # ========== TEMPLATE CONFIGURATION ==========
+  # Define all templates used in your application
+  # 
+  # Each template has:
+  #   languages: Map of language codes to Meta template names
+  #   params: Number of parameters this template uses (optional)
+  #   buttons: List of button payloads (optional)
+  #
+  # NOTE: Templates must be created and approved in Meta Business Manager first
+  
+  templates:
+    
+    # Example: Appointment Confirmation Template
+    appointment-confirmation:
+      languages:
+        # Language code -> Meta template name (from WhatsApp Manager)
+        es: "appointment_confirmation_es"
+        en_US: "appointment_confirmation_en_us"
+        pt_BR: "appointment_confirmation_pt_br"
+      # Number of parameters in the template (optional)
+      # In Meta: {{1}} = clientName, {{2}} = serviceName, {{3}} = date, {{4}} = time
+      params: 4
+      # Optional buttons the template includes only allows quick reply buttons with payloads defined in Meta
+      buttons: ["confirmar", "reprogramar", "cancelar"]
+    
+    appointment-reminder:
+      languages:
+        es: "appointment_reminder_es"
+        en_US: "appointment_reminder_en_us"
+      # Fewer parameters: clientName, date
+      params: 2
+      buttons: []
+
+    appointment-cancelled:
+      languages:
+        es: "appointment_cancelled_es"
+        en_US: "appointment_cancelled_en_us"
+      params: 2
+      buttons: []
+
+    # Add more templates as needed...
+    # hello-world:
+    #   languages:
+    #     es: "hello_world_es"
+    #   params: 0
+    #   buttons: []
