@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
 @Slf4j
 public class WhatsAppClient {
     
-    private static final String API_VERSION = "v18.0";
-    private static final String API_BASE_URL = "https://graph.instagram.com";
+    private static final String API_VERSION = "v22.0";
+    private static final String API_BASE_URL = "https://graph.facebook.com";
     private static final String PHONE_NUMBER_PATTERN = "^\\+?[0-9]{10,15}$";
     private static final int MAX_RETRIES = 3;
     private static final long RETRY_DELAY_MS = 1000;
