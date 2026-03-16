@@ -124,7 +124,7 @@ String messageId = templateService.sendTemplateByType(
 
 ### Con botones personalizados
 
-Los botones se cargan automáticamente del YAML, pero también puedes pasar custom:
+Al usar templates, no es necesario enviar tema de botones.
 
 ```java
 List<ButtonConfig> buttons = Arrays.asList(
@@ -143,49 +143,8 @@ templateService.sendTemplate(
 
 ---
 
-## Tipos de Botones Soportados
 
-### 1. Quick Reply
-Botón simple que devuelve un payload:
 
-```yaml
-buttons:
-  - type: quick_reply
-    index: 0
-    text: "Confirmar"
-    payload: "confirm"
-```
-
-### 2. URL  
-Abre un enlace web (con opción de parámetro dinámico):
-
-```yaml
-buttons:
-  - type: url
-    index: 0
-    text: "Ver cita"
-    url: "https://example.com/appointments"
-    dynamic: false  # Si es true, añade el primer parámetro a la URL
-```
-
-### 3. Phone Number
-Botón para llamar:
-
-```yaml
-buttons:
-  - type: phone_number
-    index: 2
-    text: "Llamar"
-    phoneNumber: "+34912345678"
-```
-
----
-
-## Documentación
-
-- **[TEMPLATE_CONFIGURATION_GUIDE.md](TEMPLATE_CONFIGURATION_GUIDE.md)** - Guía completa de configuración
-
----
 
 ## Validaciones Incluidas
 
