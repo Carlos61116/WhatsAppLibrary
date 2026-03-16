@@ -16,7 +16,15 @@ import java.util.Map;
  *         es: appointment_confirmation_es
  *         en_US: appointment_confirmation_en_us
  *       params: 4
- *       buttons: [confirm, reschedule, call]
+ *       buttons:
+ *         - type: quick_reply
+ *           index: 0
+ *           text: "Confirmar"
+ *           payload: "confirm"
+ *         - type: quick_reply
+ *           index: 1
+ *           text: "Reprogramar"
+ *           payload: "reschedule"
  * 
  * This is a pure POJO - Spring property binding is configured in the backend,
  * not in the library itself, to avoid tight coupling with Spring.
@@ -28,7 +36,9 @@ public class WhatsAppTemplateConfig {
      */
     private Map<String, TemplateTypeConfig> templates = new HashMap<>();
 
-
+    /**
+     * Default language code for templates (fallback if not specified)
+     */
     private String defaultLanguage = "es";
 
 
@@ -90,17 +100,28 @@ public class WhatsAppTemplateConfig {
      */
     public static class TemplateTypeConfig {
         
+        /**
+         * Map of language codes to Meta template names
+         * Example: {"es": "appointment_confirmation_es", "en_US": "appointment_confirmation_en_us"}
+         */
         private Map<String, String> languages = new HashMap<>();
 
+        /**
+         * Number of dynamic parameters in the template body
+         * In Meta: {{1}}, {{2}}, {{3}}, etc.
+         */
         private int params = 0;
 
-        private List<String> buttons = List.of();
+        /**
+         * List of button configurations for the template
+         */
+        private List<ButtonConfig> buttons = List.of();
 
 
         public TemplateTypeConfig() {
         }
 
-        public TemplateTypeConfig(Map<String, String> languages, int params, List<String> buttons) {
+        public TemplateTypeConfig(Map<String, String> languages, int params, List<ButtonConfig> buttons) {
             this.languages = languages;
             this.params = params;
             this.buttons = buttons;
@@ -123,11 +144,11 @@ public class WhatsAppTemplateConfig {
             this.params = params;
         }
 
-        public List<String> getButtons() {
+        public List<ButtonConfig> getButtons() {
             return buttons;
         }
 
-        public void setButtons(List<String> buttons) {
+        public void setButtons(List<ButtonConfig> buttons) {
             this.buttons = buttons;
         }
 
