@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import com.whatsapp.notifications.client.WhatsAppClient;
 import com.whatsapp.notifications.services.WhatsAppTemplateService;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WhatsAppAutoConfiguration {
 
     @Bean
-    public WhatsAppClient whatsAppClient(WhatsAppProperties props) {
+     WhatsAppClient whatsAppClient(WhatsAppProperties props) {
         props.validate();
         WhatsAppClient client = new WhatsAppClient(
             props.getPhoneNumberId(),
@@ -33,11 +35,11 @@ public class WhatsAppAutoConfiguration {
     }
 
     @Bean
-    public WhatsAppTemplateConfig whatsAppTemplateConfig(WhatsAppProperties props) {
+     WhatsAppTemplateConfig whatsAppTemplateConfig(WhatsAppProperties props) {
         WhatsAppTemplateConfig config = new WhatsAppTemplateConfig();
         config.setDefaultLanguage(props.getDefaultLanguage());
         
-        java.util.Map<String, WhatsAppTemplateConfig.TemplateTypeConfig> templates = new java.util.HashMap<>();
+        Map<String, WhatsAppTemplateConfig.TemplateTypeConfig> templates = new HashMap<>();
         if (props.getTemplates() != null) {
             props.getTemplates().forEach((type, templateProps) -> {
                 WhatsAppTemplateConfig.TemplateTypeConfig typeConfig = 
@@ -56,8 +58,8 @@ public class WhatsAppAutoConfiguration {
     }
 
     @Bean
-    public WhatsAppTemplateService whatsAppTemplateService(WhatsAppProperties props,
-                                                                WhatsAppTemplateConfig templateConfig) {
+    WhatsAppTemplateService whatsAppTemplateService(WhatsAppProperties props,
+                                                 WhatsAppTemplateConfig templateConfig) {
         return new WhatsAppTemplateService(
             props.getPhoneNumberId(),
             props.getAccessToken(),

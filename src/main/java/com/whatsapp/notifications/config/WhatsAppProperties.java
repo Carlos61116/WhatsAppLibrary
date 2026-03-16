@@ -1,24 +1,11 @@
 package com.whatsapp.notifications.config;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * Main WhatsApp properties class that maps the entire whatsapp section from YAML
- * 
- * Structure in YAML:
- * whatsapp:
- *   enabled: true
- *   phone-number-id: "..."
- *   access-token: "..."
- *   default-language: es
- *   templates:
- *     hello_world:
- *       languages:
- *         es: "template_name"
- *       params: 4
- */
 @ConfigurationProperties(prefix = "whatsapp")
 public class WhatsAppProperties {
 
@@ -146,7 +133,7 @@ public class WhatsAppProperties {
     public static class TemplateConfig {
         private Map<String, String> languages = new HashMap<>();
         private int params = 0;
-        private java.util.List<String> buttons = java.util.List.of();
+        private List<ButtonConfig> buttons = new ArrayList<>();
 
         public Map<String, String> getLanguages() {
             return languages;
@@ -164,11 +151,11 @@ public class WhatsAppProperties {
             this.params = params;
         }
 
-        public java.util.List<String> getButtons() {
+        public List<ButtonConfig> getButtons() {
             return buttons;
         }
 
-        public void setButtons(java.util.List<String> buttons) {
+        public void setButtons(List<ButtonConfig> buttons) {
             this.buttons = buttons;
         }
     }
